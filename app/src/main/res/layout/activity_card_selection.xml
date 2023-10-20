@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#6082B6"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select your cards..."
+        android:gravity="center_horizontal"
+        android:padding="10dp"/>
+
+    <GridLayout
+        android:id="@+id/card_selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:rowCount="4"
+        android:columnCount="4">
+
+    </GridLayout>
+
+
+    <LinearLayout
+        android:id="@+id/suit_selection"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/club_suit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/card_suit_clubs"/>
+
+        <ImageView
+            android:id="@+id/diamond_suit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/card_suit_diamonds"/>
+
+        <ImageView
+            android:id="@+id/heart_suit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/card_suit_heats"/>
+
+        <ImageView
+            android:id="@+id/spade_suit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/card_suit_spades"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/card_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/point_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/distribution_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/total_point_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/user_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"/>
+
+        <RadioButton
+            android:id="@+id/left_opp_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L-Opp"/>
+
+        <RadioButton
+            android:id="@+id/partner_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Partner"/>
+
+        <RadioButton
+            android:id="@+id/right_opp_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R-Opp"/>
+
+    </RadioGroup>
+"
+
+    <Button
+        android:id="@+id/next_button"
+        android:text="Next"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"/>
+
+
+
+
+</LinearLayout>
