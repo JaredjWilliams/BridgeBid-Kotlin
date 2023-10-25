@@ -4,5 +4,6 @@ enum class Suit {
     CLUBS,
     DIAMONDS,
     HEARTS,
-    SPADES
+    SPADES,
+    NO_TRUMP
 }

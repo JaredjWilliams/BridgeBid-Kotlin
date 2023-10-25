@@ -1,5 +1,6 @@
 package com.example.bridgeapp.modules.cardSelection
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.example.bridgeapp.R
 import com.example.bridgeapp.enums.Player
 import com.example.bridgeapp.enums.PlayingCard
 import com.example.bridgeapp.enums.Suit
+import com.example.bridgeapp.modules.bidscreen.BidScreenActivity
 
 class CardSelectionActivity : ComponentActivity(), CardSelectionInterface {
 
@@ -41,8 +43,10 @@ class CardSelectionActivity : ComponentActivity(), CardSelectionInterface {
         setViews()
 
         updateCardSelection(currentSuit, false)
+
         initializeSuitLayout()
         initializeRadioButtons()
+        initializeNextButton()
 
         presenter.updatePointViews()
     }
@@ -138,6 +142,13 @@ class CardSelectionActivity : ComponentActivity(), CardSelectionInterface {
         button.setOnClickListener {
             presenter.updateDealer(player)
             presenter.updateNextButton()
+        }
+    }
+
+    private fun initializeNextButton() {
+        nextButton.setOnClickListener {
+            val bidScreenActivity = Intent(this, BidScreenActivity::class.java)
+            startActivity(bidScreenActivity)
         }
     }
 

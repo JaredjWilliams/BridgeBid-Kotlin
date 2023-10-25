@@ -29,6 +29,10 @@
             android:screenOrientation="portrait"
             android:label=""/>
 
+        <activity android:name=".modules.bidscreen.BidScreenActivity"
+            android:screenOrientation="portrait"
+            android:label=""/>
+
     </application>
 
 </manifest>
