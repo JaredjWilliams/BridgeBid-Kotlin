@@ -12,37 +12,59 @@ import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import com.example.bridgeapp.R
 import com.example.bridgeapp.enums.Bid
-import com.example.bridgeapp.enums.Suit
-import android.graphics.Color
+import android.util.Log
+import com.example.bridgeapp.models.Game
 
 class BidScreenActivity : ComponentActivity(), BidScreenInterface {
+    private fun retrieveGameFromGSON() {
+        val gameJson = intent.getStringExtra("gameObjectAsString")
+
+        if (gameJson != null) {
+            val gameObject = Game.fromJson(gameJson)
+            game = gameObject
+        }
+    }
 
     private lateinit var gridView : GridLayout
+    private lateinit var currentPlayer : TextView
+    private lateinit var presenter: BidScreenPresenter
+
+    var game : Game = Game()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getPresenter()
+        retrieveGameFromGSON()
 
         setContentView(R.layout.activity_bid_screen)
 
         setView()
 
-        initializeBidGridView()
-
-
+        initializeViews()
     }
 
     private fun getPresenter() {
-
+        presenter = BidScreenPresenter()
     }
 
     private fun setView() {
         gridView = findViewById(R.id.bid_grid_view)
+        currentPlayer = findViewById(R.id.current_player)
+
+    }
+
+    private fun initializeViews() {
+        createCurrentPlayerText(game)
+        initializeBidGridView()
+    }
+
+    private fun createCurrentPlayerText(game: Game) {
+        currentPlayer.text = presenter.setPlayerBidText(game.currentPlayerTurn)
     }
 
     private fun initializeBidGridView() {
         var bids = enumValues<Bid>()
-        val params = ViewGroup.MarginLayoutParams(100, 100)
+        val params = ViewGroup.MarginLayoutParams(200, 200)
         params.setMargins(10, 10, 10, 10)
 
         bids.forEach { bid: Bid ->
@@ -51,16 +73,15 @@ class BidScreenActivity : ComponentActivity(), BidScreenInterface {
     }
 
     private fun initializeBidCard(bid: Bid, params: ViewGroup.LayoutParams) {
-        var bidImage = TextView(this)
-        var blackImages = listOf(Suit.SPADES, Suit.CLUBS)
+        val bidImage = TextView(this)
 
         bidImage.setPadding(10,10,10,10)
         bidImage.background = ContextCompat.getDrawable(this, bid.image)
         bidImage.layoutParams = params
         bidImage.elevation = 4.0f
-        bidImage.text = "" + bid.value
+        bidImage.text = bid.label
         bidImage.gravity = Gravity.CENTER
-        bidImage.setTextColor(if (blackImages.contains(bid.suit)) Color.WHITE else Color.BLACK)
+        bidImage.setTextColor(bid.color)
 
         bidImage.setOnClickListener {
 

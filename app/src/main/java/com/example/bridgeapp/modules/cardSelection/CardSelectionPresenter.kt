@@ -1,18 +1,23 @@
 package com.example.bridgeapp.modules.cardSelection
 
+import android.util.Log
 import android.widget.ImageView
 import com.example.bridgeapp.R
 import com.example.bridgeapp.enums.Player
 import com.example.bridgeapp.enums.PlayingCard
 import com.example.bridgeapp.enums.Suit
 import com.example.bridgeapp.models.Game
+import com.example.bridgeapp.viewmodel_builder.GameBuilder
 import com.example.bridgeapp.viewmodel_builder.PointBuilder
+import com.google.gson.Gson
 
 class CardSelectionPresenter(private val view: CardSelectionInterface) {
 
-    var hand = mutableListOf<PlayingCard>()
     private var pointBuilder = PointBuilder()
+    private var gameBuilder = GameBuilder()
     private var currentSuit = Suit.CLUBS
+
+    var hand = mutableListOf<PlayingCard>()
     var dealer: Player? = null
     var pointCounter = 0
 
@@ -108,5 +113,15 @@ class CardSelectionPresenter(private val view: CardSelectionInterface) {
         view.setTotalPointCounterTextView(userTotalPoints())
         view.setCardCounterTextView(userHandSize())
         view.setPointCounterTextView(pointCounter)
+    }
+
+    fun updateGame() {
+
+    }
+
+    fun gameToGSON() : String {
+        val gson = Gson()
+        val testing = gson.toJson(gameBuilder.apply(dealer, null, dealer))
+        return testing
     }
 }
