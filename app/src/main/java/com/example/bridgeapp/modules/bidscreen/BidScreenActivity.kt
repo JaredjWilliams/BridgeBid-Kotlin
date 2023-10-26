@@ -21,7 +21,7 @@ class BidScreenActivity : ComponentActivity(), BidScreenInterface {
 
         if (gameJson != null) {
             val gameObject = Game.fromJson(gameJson)
-            game = gameObject
+            presenter.game = gameObject
         }
     }
 
@@ -29,7 +29,7 @@ class BidScreenActivity : ComponentActivity(), BidScreenInterface {
     private lateinit var currentPlayer : TextView
     private lateinit var presenter: BidScreenPresenter
 
-    var game : Game = Game()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,7 @@ class BidScreenActivity : ComponentActivity(), BidScreenInterface {
     }
 
     private fun getPresenter() {
-        presenter = BidScreenPresenter()
+        presenter = BidScreenPresenter(this)
     }
 
     private fun setView() {
@@ -54,12 +54,12 @@ class BidScreenActivity : ComponentActivity(), BidScreenInterface {
     }
 
     private fun initializeViews() {
-        createCurrentPlayerText(game)
+        createCurrentPlayerText()
         initializeBidGridView()
     }
 
-    private fun createCurrentPlayerText(game: Game) {
-        currentPlayer.text = presenter.setPlayerBidText(game.currentPlayerTurn)
+    override fun createCurrentPlayerText() {
+        currentPlayer.text = presenter.setPlayerBidText(presenter.game.currentPlayerTurn)
     }
 
     private fun initializeBidGridView() {
@@ -84,7 +84,7 @@ class BidScreenActivity : ComponentActivity(), BidScreenInterface {
         bidImage.setTextColor(bid.color)
 
         bidImage.setOnClickListener {
-
+            presenter.onBidPressed(bid)
         }
 
         gridView.addView(bidImage)
