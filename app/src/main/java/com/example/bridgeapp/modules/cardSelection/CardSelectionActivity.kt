@@ -148,6 +148,7 @@ class CardSelectionActivity : ComponentActivity(), CardSelectionInterface {
     private fun initializeNextButton() {
         nextButton.setOnClickListener {
             val bidScreenActivity = Intent(this, BidScreenActivity::class.java)
+            bidScreenActivity.putExtra("gameObjectAsString", presenter.gameToGSON())
             startActivity(bidScreenActivity)
         }
     }
